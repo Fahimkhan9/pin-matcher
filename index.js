@@ -1,38 +1,67 @@
+//selecting elements
+const generateForm = document.getElementById("generate-form");
 
+const generateBtn = document.querySelector(".generate-btn");
 
-const generateForm = document.getElementById("generate-form")
-console.log(generateForm);
-const generateBtn = document.querySelector(".generate-btn")
-console.log(generateBtn);
-const calculateForm = document.getElementById("calculate-form")
-console.log(calculateForm);
-const submitBtn = document.querySelector(".submit-btn")
-console.log(submitBtn);
-const pinMatch = document.getElementById("pin-match")
-const pinUnmatch = document.getElementById("pin-unmatch")
+const calculateForm = document.getElementById("calculate-form");
 
-pinMatch.style.display = 'none'
-pinUnmatch.style.display = 'none'
+const submitBtn = document.querySelector(".submit-btn");
 
-const randomFourDigitNumber = Math.floor(Math.random() * (9999 - 1000)) + 1000
-console.log(randomFourDigitNumber);
-generateBtn.addEventListener("click",function () {
-    generateForm.value = randomFourDigitNumber
-})
+const pinMatch = document.getElementById("pin-match");
 
-function showCalculateFormValue(number){
- calculateForm.value += number
+const pinUnmatch = document.getElementById("pin-unmatch");
+
+const caseDecrease = document.getElementById("case-decrease");
+
+//added display none
+pinMatch.style.display = "none";
+
+pinUnmatch.style.display = "none";
+
+//random four digit number
+const randomFourDigitNumber = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+
+//generating four digits number into generate number form
+generateBtn.addEventListener("click", function () {
+  generateForm.value = randomFourDigitNumber;
+});
+
+//function for showing number value into input
+function showCalculateFormValue(number) {
+  calculateForm.value += number;
 }
-submitBtn.addEventListener("click", function(){
-    
-    if (calculateForm.value !== '' && generateForm.value !== '' && calculateForm.value == generateForm.value) {
-        console.log('m');
-        pinMatch.style.display= 'block'
-    } else {
-        console.log('um');
-        pinUnmatch.style.display = 'block'
-    }
-})
 
+//function for clearing  all input value
+function clearAllCalculateFormValue() {
+  calculateForm.value = "";
+}
 
+//function for claring only last element of input value
+function deleteOneCalculateFormValue() {
+  var calculateFormValue = calculateForm.value;
+  calculateForm.value = calculateFormValue.substr(
+    0,
+    calculateFormValue.length - 1
+  );
+}
 
+//checking whether pin is correct or incorrect
+submitBtn.addEventListener("click", function () {
+  if (
+    calculateForm.value !== "" &&
+    generateForm.value !== "" &&
+    calculateForm.value == generateForm.value
+  ) {
+    pinMatch.style.display = "block";
+  } else {
+    pinUnmatch.style.display = "block";
+  }
+
+  if (caseDecrease.innerText <= 0) {
+  }
+
+  var currentCaseValue = caseDecrease.innerText;
+  var currentCaseValueNumber = parseFloat(currentCaseValue);
+
+  caseDecrease.textContent = --currentCaseValueNumber;
+});
