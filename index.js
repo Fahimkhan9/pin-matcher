@@ -57,11 +57,22 @@ submitBtn.addEventListener("click", function () {
     pinUnmatch.style.display = "block";
   }
 
-  if (caseDecrease.innerText <= 0) {
+  //some functionality for "3 try left"
+  //if the user try 3 times the submit button will be disabled
+  var currentCase = caseDecrease.innerHTML;
+
+  var currentCaseNumber = parseFloat(currentCase);
+
+  caseDecrease.innerHTML = --currentCaseNumber;
+
+  if (currentCaseNumber === 0) {
+      
+    caseDecrease.innerHTML = "0 ";
+
+    submitBtn.setAttribute("disabled", "disabled");
   }
 
-  var currentCaseValue = caseDecrease.innerText;
-  var currentCaseValueNumber = parseFloat(currentCaseValue);
 
-  caseDecrease.textContent = --currentCaseValueNumber;
 });
+
+
